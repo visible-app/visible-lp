@@ -41,6 +41,9 @@ mark {
 /* A phrase kept on one line (lines break only between phrases). */
 .ph { display: inline-block; }
 
+/* The robot trap: off screen, so people never see or tab into it. */
+.trap { position: absolute; left: -10000px; top: auto; width: 1px; height: 1px; overflow: hidden; }
+
 .visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 
 /* ---------- top ---------- */

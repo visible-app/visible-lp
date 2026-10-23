@@ -153,7 +153,16 @@ if (reduceMotion) {
 const form = document.querySelector(".signup-form");
 const message = form.querySelector(".form-message");
 const email = form.querySelector("input[name=email_address]");
+const trap = form.querySelector("input[name=lp_check]");
 const submit = form.querySelector("button[type=submit]");
+
+/**
+ * An email address in its usual shape: a name, 「@」, then a domain with at
+ * least one dot whose last part is two letters or more (「a@b」「a@b.c」
+ * 「a b@c.jp」 are not sent).
+ */
+const emailShape = /^[^\s@"(),:;<>[\]\\]+@[A-Za-z0-9](?:[A-Za-z0-9-]*[A-Za-z0-9])?(?:\.[A-Za-z0-9](?:[A-Za-z0-9-]*[A-Za-z0-9])?)*\.[A-Za-z]{2,}$/;
+const isEmail = (value) => value.length <= 254 && emailShape.test(value) && !value.includes("..");
 
 const say = (text, kind) => {
   message.textContent = text;
@@ -162,7 +171,14 @@ const say = (text, kind) => {
 
 form.addEventListener("submit", async (event) => {
   event.preventDefault();
-  if (!email.value.trim() || !email.checkValidity()) {
+  // Filled in by a program, not a person: nothing is sent (and it is shown nothing different).
+  if (trap.value) {
+    form.reset();
+    say("確認メールを送りました。メールの中のボタンを押すと、先行登録が完了します。", "success");
+    return;
+  }
+  const address = email.value.trim();
+  if (!address || !email.checkValidity() || !isEmail(address)) {
     say("メールアドレスを確かめてください。", "error");
     email.focus();
     return;
@@ -170,7 +186,10 @@ form.addEventListener("submit", async (event) => {
   submit.disabled = true;
   say("送っています…");
   try {
-    const response = await fetch(form.action, { method: "POST", body: new FormData(form), headers: { Accept: "application/json" } });
+    // Only the address goes to Kit.
+    const body = new FormData();
+    body.append("email_address", address);
+    const response = await fetch(form.action, { method: "POST", body, headers: { Accept: "application/json" } });
     const result = await response.json();
     if (result.status === "success") {
       form.reset();
