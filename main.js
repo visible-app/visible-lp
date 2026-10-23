@@ -165,6 +165,62 @@ const submit = form.querySelector("button[type=submit]");
 const emailShape = /^[^\s@"(),:;<>[\]\\]+@[A-Za-z0-9](?:[A-Za-z0-9-]*[A-Za-z0-9])?(?:\.[A-Za-z0-9](?:[A-Za-z0-9-]*[A-Za-z0-9])?)*\.[A-Za-z]{2,}$/;
 const isEmail = (value) => value.length <= 254 && emailShape.test(value) && !value.includes("..");
 
+/*
+ * Kit sometimes holds a sign-up (「quarantined」) until a person passes its
+ * security check. Like Kit's own form, its check page opens here; it tells this
+ * page when it is done (「ckjs:guard:confirmed」). Resolves true once the
+ * sign-up went through, false if the check was closed first.
+ */
+const kitOrigin = "https://app.kit.com";
+const guard = document.querySelector(".guard");
+const guardFrame = guard.querySelector(".guard-frame");
+const guardFrameBox = guard.querySelector(".guard-frame-box");
+const guardPageWidth = 400;
+let guardPageHeight = 500;
+const fitGuard = () => {
+  const scale = Math.min(1, guardFrameBox.clientWidth / guardPageWidth);
+  guardFrame.style.height = `${guardPageHeight}px`;
+  guardFrame.style.transform = `scale(${scale})`;
+  guardFrameBox.style.height = `${Math.ceil(guardPageHeight * scale)}px`;
+};
+window.addEventListener("resize", () => { if (guard.open) fitGuard(); });
+const confirmWithKit = (url) => new Promise((resolve) => {
+  let checkUrl;
+  try {
+    checkUrl = new URL(url);
+  } catch {
+    resolve(false);
+    return;
+  }
+  if (checkUrl.origin !== kitOrigin || !checkUrl.pathname.startsWith("/forms/guards/")) {
+    resolve(false);
+    return;
+  }
+  let confirmed = false;
+  const listen = (event) => {
+    if (event.origin !== kitOrigin || event.source !== guardFrame.contentWindow) return;
+    const data = event.data || {};
+    if (data.name === "ckjs:guard:size" && Number(data.height) > 0) {
+      guardPageHeight = Math.min(Number(data.height), 640);
+      fitGuard();
+    }
+    if (data.name === "ckjs:guard:confirmed") {
+      confirmed = true;
+      guard.close();
+    }
+  };
+  guard.addEventListener("close", () => {
+    window.removeEventListener("message", listen);
+    guardFrame.removeAttribute("src");
+    resolve(confirmed);
+  }, { once: true });
+  window.addEventListener("message", listen);
+  guardFrame.src = checkUrl.href;
+  guard.showModal();
+  fitGuard();
+});
+guard.querySelector(".guard-close").addEventListener("click", () => guard.close());
+
 const say = (text, kind) => {
   message.textContent = text;
   message.className = `form-message ${kind ? `is-${kind}` : ""}`;
@@ -195,6 +251,14 @@ form.addEventListener("submit", async (event) => {
     if (result.status === "success") {
       form.reset();
       say(thanks, "success");
+    } else if (result.status === "quarantined") {
+      say("確認の画面を開いています…");
+      if (await confirmWithKit(result.url)) {
+        form.reset();
+        say(thanks, "success");
+      } else {
+        say("登録はまだ終わっていません。もう一度「先行登録する」を押して、確認を最後まで進めてください。", "error");
+      }
     } else {
       say("うまく登録できませんでした。メールアドレスを確かめて、もう一度お試しください。", "error");
     }
