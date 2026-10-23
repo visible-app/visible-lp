@@ -116,6 +116,15 @@
         <button class="button" type="submit">先行登録する</button>
         <p class="form-message" role="status" aria-live="polite"></p>
       </form>
+      <!-- When Kit wants to make sure a person is signing up, its security check (reCAPTCHA) opens here, as Kit's own form would. -->
+      <dialog class="guard" aria-labelledby="guard-title">
+        <div class="guard-panel">
+          <p class="guard-title" id="guard-title">あと1つだけ</p>
+          <p class="guard-body">ロボットでないことを確かめて「Subscribe」を押すと、登録が終わります。</p>
+          <div class="guard-frame-box"><iframe class="guard-frame" title="登録の確認（Kit）"></iframe></div>
+          <button class="guard-close" type="button">閉じる</button>
+        </div>
+      </dialog>
       <ul class="notes" role="list">
         <li>届くのはVisibleのお知らせだけです。いつでも解除できます。</li>
         <li>先行登録した方には、リリース週だけ年額プランの初年度を1,980円でご案内します。</li>
