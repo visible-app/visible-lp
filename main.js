@@ -1,15 +1,18 @@
 // Visible pre-registration page.
 
 /**
- * The release, in one place. Once the app is out, put its App Store link in
- * `appStoreUrl`: every 「11月11日、iPhoneでリリース」 on the page becomes the
- * App Store button.
+ * The release. 「11月11日、iPhoneでリリース」 is written in the page itself
+ * (index.html, the two `data-release` places), so it shows even before this
+ * script runs. Once the app is out, put its App Store link in `appStoreUrl`:
+ * both places become the App Store button.
  */
 const release = {
-  label: "11月11日、iPhoneでリリース",
   appStoreUrl: "",
   appStoreLabel: "App Storeでダウンロード",
 };
+
+/** What the page says once an address is in (Kit sends no confirmation email). */
+const thanks = "登録ありがとうございます。11月11日のリリースをお知らせします。";
 
 /** ①②③'s frames (assets/flow/00.jpg …): how many each part has, in order. */
 const flow = { frames: [26, 22, 28], src: (index) => `assets/flow/${String(index).padStart(2, "0")}.jpg` };
@@ -26,8 +29,6 @@ for (const element of document.querySelectorAll("[data-release]")) {
     link.textContent = release.appStoreLabel;
     link.rel = "noopener";
     element.append(link);
-  } else {
-    element.textContent = release.label;
   }
 }
 
@@ -174,7 +175,7 @@ form.addEventListener("submit", async (event) => {
   // Filled in by a program, not a person: nothing is sent (and it is shown nothing different).
   if (trap.value) {
     form.reset();
-    say("確認メールを送りました。メールの中のボタンを押すと、先行登録が完了します。", "success");
+    say(thanks, "success");
     return;
   }
   const address = email.value.trim();
@@ -193,7 +194,7 @@ form.addEventListener("submit", async (event) => {
     const result = await response.json();
     if (result.status === "success") {
       form.reset();
-      say("確認メールを送りました。メールの中のボタンを押すと、先行登録が完了します。", "success");
+      say(thanks, "success");
     } else {
       say("うまく登録できませんでした。メールアドレスを確かめて、もう一度お試しください。", "error");
     }
