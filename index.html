@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Visible｜見えるから、動き出せる。</title>
+  <meta name="description" content="Visibleなら、目的から今日のタスクまでの道筋が、いつでも全部見えます。">
+  <meta name="theme-color" content="#151C26">
+
+  <!-- The card shown when the link is shared (X, LINE, …). -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://visible-app.github.io/visible-lp/">
+  <meta property="og:site_name" content="Visible">
+  <meta property="og:title" content="Visible｜見えるから、動き出せる。">
+  <meta property="og:description" content="Visibleなら、目的から今日のタスクまでの道筋が、いつでも全部見えます。">
+  <meta property="og:image" content="https://visible-app.github.io/visible-lp/assets/og.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:locale" content="ja_JP">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Visible｜見えるから、動き出せる。">
+  <meta name="twitter:description" content="Visibleなら、目的から今日のタスクまでの道筋が、いつでも全部見えます。">
+  <meta name="twitter:image" content="https://visible-app.github.io/visible-lp/assets/og.jpg">
+
+  <link rel="icon" type="image/png" href="assets/favicon.png">
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@500;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="top">
+    <a class="brand" href="#top" aria-label="Visible"><img src="assets/icon.png" alt="" width="32" height="32"><span>Visible</span></a>
+    <!-- Release: becomes the App Store button once `release.appStoreUrl` is set in main.js. -->
+    <span class="release" data-release></span>
+  </header>
+
+  <main id="top">
+    <!-- ① 4/9 -->
+    <section class="hero">
+      <h1 class="headline"><span class="line"><mark>見えるから</mark>、動き出せる。</span><span class="line"><mark>見えるから</mark>、続けられる。</span></h1>
+      <p class="lead">Visibleなら、目的から今日のタスクまでの道筋が、いつでも全部見えます。</p>
+      <div class="video-frame">
+        <!-- The 30-second video: swap the file at assets/visible-30s.mp4 (and its first frame, assets/visible-30s-poster.jpg). -->
+        <video src="assets/visible-30s.mp4" poster="assets/visible-30s-poster.jpg" autoplay muted loop playsinline preload="metadata" aria-label="Visibleの紹介動画（音声なし）"></video>
+      </div>
+      <a class="button" href="#signup">先行登録する</a>
+    </section>
+
+    <!-- ② 1/9 and 2/9 -->
+    <section class="section insight reveal">
+      <h2 class="title"><span class="ph">こんなこと、</span><span class="ph">ありませんか？</span></h2>
+      <ul class="choices" role="list">
+        <li><button type="button" class="choice" aria-pressed="false" data-heading="タスクだけが、目的から離れて残っていませんか？" data-body="作ったときは、理由があったはずです。"><span class="check" aria-hidden="true"></span><span>予定を見て「これ、何のためだっけ」と思う</span></button></li>
+        <li><button type="button" class="choice" aria-pressed="false" data-heading="どれも大事に見えて、どれも手につかない。" data-body="何のためかが見えないと、選べなくなります。"><span class="check" aria-hidden="true"></span><span>やることが多すぎて、どれも手につかない</span></button></li>
+        <li><button type="button" class="choice" aria-pressed="false" data-heading="動いたのに、前に進んだ気がしない。" data-body="やったことが、目的とつながって見えていないのかもしれません。"><span class="check" aria-hidden="true"></span><span>忙しかったのに、何も進んでいない気がする</span></button></li>
+        <li><button type="button" class="choice" aria-pressed="false" data-heading="目標と今日の予定のあいだが、空いていませんか？" data-body="そのあいだをつなぐ道筋が、見えていないだけかもしれません。"><span class="check" aria-hidden="true"></span><span>目標を立てても、毎日の予定とつながらない</span></button></li>
+        <li><button type="button" class="choice" aria-pressed="false" data-heading="整理したのに、動き出せない。" data-body="分かったことが、毎日の時間に落ちていないのかもしれません。"><span class="check" aria-hidden="true"></span><span>本やメモで整理しても、動き出せない</span></button></li>
+      </ul>
+      <div class="answer" aria-live="polite" hidden>
+        <p class="answer-heading"></p>
+        <p class="answer-body"></p>
+      </div>
+    </section>
+
+    <!-- ③ 3/9 -->
+    <section class="section relief reveal">
+      <h2 class="title"><span class="ph">でも、</span><span class="ph">それはきっと、</span><span class="ph"><mark>あなたの</mark></span><span class="ph"><mark>せいじゃありません</mark>。</span></h2>
+      <p>続かないのは、動き出せないのは、そのタスクが何のためか、見えなくなっているから。</p>
+      <p>目的からタスクまでの道筋が、いつも全部見えていれば、きっと防げる。</p>
+    </section>
+
+    <!-- ④ 5/9 – 7/9, stepped through as the page scrolls -->
+    <section class="pillars" aria-labelledby="pillars-title">
+      <h2 class="title section-intro reveal" id="pillars-title"><span class="ph">タスクから</span><span class="ph">目的まで</span><span class="ph">常に見える</span><span class="ph">仕組みは、</span><span class="ph">主に<mark>この3つ</mark>。</span></h2>
+      <div class="pillars-track">
+        <div class="pillars-sticky">
+          <ol class="pillar-texts" role="list">
+            <li class="pillar is-active" data-part="0">
+              <p class="chip"><span>①</span>アウトラインで分ける</p>
+              <h3><span class="ph">目的から、</span><span class="ph">どこまでも</span><span class="ph">細かく</span><span class="ph">分けられる</span></h3>
+              <p>大きな目標も、今日できる大きさになるまで。何段でも分けられます。</p>
+            </li>
+            <li class="pillar" data-part="1">
+              <p class="chip"><span>②</span>タイムラインに置く</p>
+              <h3><span class="ph">どれだけ</span><span class="ph">分けても、</span><span class="ph">タスクには</span><span class="ph">目的が</span><span class="ph">付いたまま</span></h3>
+              <p>時間に置いたタスクにも、いつも「何のため」が見えています。</p>
+            </li>
+            <li class="pillar" data-part="2">
+              <p class="chip"><span>③</span>タイムラインのタスクを長押し</p>
+              <h3><span class="ph">長押し</span><span class="ph">ひとつで、</span><span class="ph">一番上の</span><span class="ph">目的まで</span><span class="ph">たどれる</span></h3>
+              <p>何段下のタスクからでも、目的までの道筋が一度に見えます。</p>
+            </li>
+          </ol>
+          <div class="phone" aria-hidden="true">
+            <canvas class="phone-screen" width="312" height="675"></canvas>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ⑤ 先行登録 -->
+    <section class="section signup reveal" id="signup">
+      <h2 class="title">先行登録</h2>
+      <p class="signup-release"><span class="release" data-release></span></p>
+      <!-- Kit form 10083551, drawn in this page's own look: email only. -->
+      <form class="signup-form" action="https://app.kit.com/forms/10083551/subscriptions" method="post" novalidate>
+        <label class="visually-hidden" for="email">メールアドレス</label>
+        <input id="email" name="email_address" type="email" inputmode="email" autocomplete="email" placeholder="メールアドレス" required>
+        <button class="button" type="submit">先行登録する</button>
+        <p class="form-message" role="status" aria-live="polite"></p>
+      </form>
+      <ul class="notes" role="list">
+        <li>届くのはVisibleのお知らせだけです。いつでも解除できます。</li>
+        <li>先行登録した方には、リリース週だけ年額プランの初年度を1,980円でご案内します。</li>
+      </ul>
+    </section>
+
+    <!-- ⑥ よくある質問 -->
+    <section class="section faq reveal">
+      <h2 class="title">よくある質問</h2>
+      <details>
+        <summary>対応機種は？</summary>
+        <p>Visibleは、iPhoneのアプリです。</p>
+      </details>
+      <details>
+        <summary>データはどこに保存されますか？</summary>
+        <p>目的やタスクの中身は、あなたのiPhoneの中だけに保存されます。</p>
+      </details>
+      <details>
+        <summary>無料で使えますか？</summary>
+        <p>無料で、目的を2つまで使えます。</p>
+      </details>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <a href="https://arrow-way-18d.notion.site/Visible-3e4db63c52a480acbf3bff5df83c6680" target="_blank" rel="noopener">プライバシーポリシー</a>
+    <p>© 2026 Visible</p>
+  </footer>
+
+  <script src="main.js" defer></script>
+</body>
+</html>
