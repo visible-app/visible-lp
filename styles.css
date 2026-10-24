@@ -113,8 +113,9 @@ main { overflow-x: clip; }
 /* ---------- ① ---------- */
 .hero { padding-top: 34px; text-align: left; }
 .headline { margin: 0; font-size: clamp(22px, 7.1vw, 44px); line-height: 1.38; font-weight: 900; letter-spacing: -1px; }
-.headline .line { display: block; white-space: nowrap; }
-.lead { margin-top: 16px; color: var(--gold-soft); font-size: 16px; font-weight: 700; }
+.pitch { margin-top: 18px; font-size: clamp(18px, 5.3vw, 26px); line-height: 1.5; font-weight: 900; letter-spacing: -0.5px; }
+.pitch .line { display: block; white-space: nowrap; }
+.lead { margin-top: 14px; color: var(--gold-soft); font-size: 16px; font-weight: 700; }
 .video-frame {
   width: min(78vw, 340px);
   aspect-ratio: 9 / 16;
