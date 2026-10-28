@@ -221,6 +221,19 @@ const confirmWithKit = (url) => new Promise((resolve) => {
 });
 guard.querySelector(".guard-close").addEventListener("click", () => guard.close());
 
+/*
+ * GA4: one generate_lead for a sign-up Kit accepted (right away, or once its
+ * security check was passed). Only how it went through is sent — never the
+ * address. If GA4 is blocked or fails, nothing changes for the person signing up.
+ */
+const recordLead = (method) => {
+  try {
+    if (typeof window.gtag === "function") window.gtag("event", "generate_lead", { method });
+  } catch {
+    // Measuring must never get in the way of signing up.
+  }
+};
+
 const say = (text, kind) => {
   message.textContent = text;
   message.className = `form-message ${kind ? `is-${kind}` : ""}`;
@@ -242,6 +255,16 @@ form.addEventListener("submit", async (event) => {
   }
   submit.disabled = true;
   say("送っています…");
+  // At most one generate_lead for this sign-up, however the success arrives.
+  let leadRecorded = false;
+  const succeeded = (method) => {
+    if (!leadRecorded) {
+      leadRecorded = true;
+      recordLead(method);
+    }
+    form.reset();
+    say(thanks, "success");
+  };
   try {
     // Only the address goes to Kit.
     const body = new FormData();
@@ -249,13 +272,11 @@ form.addEventListener("submit", async (event) => {
     const response = await fetch(form.action, { method: "POST", body, headers: { Accept: "application/json" } });
     const result = await response.json();
     if (result.status === "success") {
-      form.reset();
-      say(thanks, "success");
+      succeeded("kit");
     } else if (result.status === "quarantined") {
       say("確認の画面を開いています…");
       if (await confirmWithKit(result.url)) {
-        form.reset();
-        say(thanks, "success");
+        succeeded("kit_checked");
       } else {
         say("登録はまだ終わっていません。もう一度「先行登録する」を押して、確認を最後まで進めてください。", "error");
       }

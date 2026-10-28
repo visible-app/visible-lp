@@ -22,6 +22,19 @@
   <meta name="twitter:description" content="Visibleなら、目的から今日のタスクまでの道筋が、いつでも全部見えます。">
   <meta name="twitter:image" content="https://visible-app.github.io/visible-lp/assets/og.jpg">
 
+  <!--
+    Google Analytics 4 (official gtag.js): page views, and one generate_lead
+    per Kit sign-up that went through (main.js). No email address or other
+    personal data is ever passed to it. The page works the same without it.
+  -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-V14GR7G7ZE"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag("js", new Date());
+    gtag("config", "G-V14GR7G7ZE", { allow_google_signals: false, allow_ad_personalization_signals: false });
+  </script>
+
   <link rel="icon" type="image/png" href="assets/favicon.png">
   <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
