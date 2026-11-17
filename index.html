@@ -3,23 +3,23 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>Visible｜見えるから、動き出せる。</title>
-  <meta name="description" content="Visibleなら、目的から今日のタスクまでの道筋が、いつでも全部見えます。">
+  <title>Visible｜「やる理由」を、見失わない。</title>
+  <meta name="description" content="やることに追われるうちに、何のためにやっていたのかが見えなくなる。Visibleは、目的と今日のタスクを一本の金の線でつないで、いつでも「何のため」に戻れるiPhoneアプリです。">
   <meta name="theme-color" content="#151C26">
 
   <!-- The card shown when the link is shared (X, LINE, …). -->
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://visible-app.github.io/visible-lp/">
   <meta property="og:site_name" content="Visible">
-  <meta property="og:title" content="Visible｜アウトライン×タイムブロックで、目的が常に見える">
-  <meta property="og:description" content="Visibleなら、目的から今日のタスクまでの道筋が、いつでも全部見えます。">
+  <meta property="og:title" content="Visible｜「やる理由」を、見失わない。">
+  <meta property="og:description" content="やることに追われるうちに、何のためにやっていたのかが見えなくなる。Visibleは、目的と今日のタスクを一本の金の線でつないで、いつでも「何のため」に戻れるiPhoneアプリです。">
   <meta property="og:image" content="https://visible-app.github.io/visible-lp/assets/og.jpg">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta property="og:locale" content="ja_JP">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Visible｜アウトライン×タイムブロックで、目的が常に見える">
-  <meta name="twitter:description" content="Visibleなら、目的から今日のタスクまでの道筋が、いつでも全部見えます。">
+  <meta name="twitter:title" content="Visible｜「やる理由」を、見失わない。">
+  <meta name="twitter:description" content="やることに追われるうちに、何のためにやっていたのかが見えなくなる。Visibleは、目的と今日のタスクを一本の金の線でつないで、いつでも「何のため」に戻れるiPhoneアプリです。">
   <meta name="twitter:image" content="https://visible-app.github.io/visible-lp/assets/og.jpg">
 
   <!--
@@ -45,21 +45,27 @@
 <body>
   <header class="top">
     <a class="brand" href="#top" aria-label="Visible"><img src="assets/icon.png" alt="" width="32" height="32"><span>Visible</span></a>
-    <!-- Release: becomes the App Store button once `release.appStoreUrl` is set in main.js. -->
-    <span class="release" data-release>11月11日、iPhoneでリリース</span>
+    <!-- Release: becomes the App Store button while `release.appStoreUrl` is set in main.js. -->
+    <span class="release" data-release>App Storeで配信中</span>
   </header>
 
   <main id="top">
     <!-- ① 4/9 -->
     <section class="hero">
-      <h1 class="headline"><span class="ph">アウトライン×</span><span class="ph">タイムブロックで、</span><span class="ph"><mark>目的が常に見える</mark>。</span></h1>
-      <p class="pitch"><span class="line"><mark>見えるから</mark>、動き出せる。</span><span class="line"><mark>見えるから</mark>、続けられる。</span></p>
-      <p class="lead"><span class="ph">タスク管理アプリ</span><span class="ph">『Visible』で、</span><span class="ph">やる意味を</span><span class="ph">見失わない毎日を。</span></p>
+      <h1 class="headline"><span class="ph">『<mark>やる理由</mark>』を、</span><span class="ph">見失わない。</span></h1>
+      <p class="lead"><span class="ph">やることに</span><span class="ph">追われるうちに、</span><span class="ph">何のために</span><span class="ph">やっていたのかが</span><span class="ph">見えなくなる。</span></p>
+      <p class="lead"><span class="ph">Visibleは、</span><span class="ph">目的と</span><span class="ph">今日のタスクを</span><span class="ph">一本の金の線で</span><span class="ph">つないで、</span><span class="ph">いつでも</span><span class="ph">「何のため」に</span><span class="ph">戻れる</span><span class="ph">iPhoneアプリです。</span></p>
       <div class="video-frame">
         <!-- The 30-second video: swap the file at assets/visible-30s.mp4 (and its first frame, assets/visible-30s-poster.jpg). -->
         <video src="assets/visible-30s.mp4" poster="assets/visible-30s-poster.jpg" autoplay muted loop playsinline preload="metadata" aria-label="Visibleの紹介動画（音声なし）"></video>
       </div>
-      <a class="button" href="#signup">先行登録する</a>
+      <!-- Goes to the App Store while `release.appStoreUrl` is set in main.js (data-store). -->
+      <a class="button" href="#signup" data-store>App Storeで入手する</a>
+      <ul class="notes hero-notes" role="list">
+        <li>無料で始められます。</li>
+        <!-- data-until: hidden after 23:59:59 (Japan time) on that day (main.js). -->
+        <li data-until="2026-11-24"><span class="ph">11月24日まで、</span><span class="ph">年額プランが</span><span class="ph">初年度2,200円</span><span class="ph">（通常2,800円）。</span></li>
+      </ul>
     </section>
 
     <!-- ② 1/9 and 2/9 -->
@@ -114,10 +120,9 @@
       </div>
     </section>
 
-    <!-- ⑤ 先行登録 -->
+    <!-- ⑤ メールでのお知らせ -->
     <section class="section signup reveal" id="signup">
-      <h2 class="title">先行登録</h2>
-      <p class="signup-release"><span class="release" data-release>11月11日、iPhoneでリリース</span></p>
+      <h2 class="title"><span class="ph">メールで</span><span class="ph">お知らせを受け取る</span></h2>
       <!-- Kit form 10083551, drawn in this page's own look: email only. -->
       <form class="signup-form" action="https://app.kit.com/forms/10083551/subscriptions" method="post" novalidate>
         <label class="visually-hidden" for="email">メールアドレス</label>
@@ -127,7 +132,7 @@
           <label for="lp-check">この欄は空のままにしてください</label>
           <input id="lp-check" name="lp_check" type="text" tabindex="-1" autocomplete="off">
         </div>
-        <button class="button" type="submit">先行登録する</button>
+        <button class="button" type="submit">登録する</button>
         <p class="form-message" role="status" aria-live="polite"></p>
       </form>
       <!-- When Kit wants to make sure a person is signing up, its security check (reCAPTCHA) opens here, as Kit's own form would. -->
@@ -141,7 +146,6 @@
       </dialog>
       <ul class="notes" role="list">
         <li>届くのはVisibleのお知らせだけです。いつでも解除できます。</li>
-        <li>先行登録した方には、リリース週だけ年額プランの初年度を1,980円でご案内します。</li>
       </ul>
     </section>
 
