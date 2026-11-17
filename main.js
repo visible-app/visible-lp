@@ -1,18 +1,18 @@
-// Visible pre-registration page.
+// Visible landing page.
 
 /**
- * The release. 「11月11日、iPhoneでリリース」 is written in the page itself
- * (index.html, the two `data-release` places), so it shows even before this
- * script runs. Once the app is out, put its App Store link in `appStoreUrl`:
- * both places become the App Store button.
+ * The App Store. 「App Storeで配信中」 (the header, `data-release`) is written in
+ * the page itself, so it shows even before this script runs. While `appStoreUrl`
+ * is set, it becomes the App Store button, and every `data-store` button
+ * (the one under the video) goes to the App Store too.
  */
 const release = {
-  appStoreUrl: "",
-  appStoreLabel: "App Storeでダウンロード",
+  appStoreUrl: "https://apps.apple.com/jp/app/id6822317740",
+  appStoreLabel: "App Storeで入手する",
 };
 
 /** What the page says once an address is in (Kit sends no confirmation email). */
-const thanks = "登録ありがとうございます。11月11日のリリースをお知らせします。";
+const thanks = "登録ありがとうございます。Visibleのお知らせをお届けします。";
 
 /** ①②③'s frames (assets/flow/00.jpg …): how many each part has, in order. */
 const flow = { frames: [26, 22, 28], src: (index) => `assets/flow/${String(index).padStart(2, "0")}.jpg` };
@@ -30,6 +30,18 @@ for (const element of document.querySelectorAll("[data-release]")) {
     link.rel = "noopener";
     element.append(link);
   }
+}
+if (release.appStoreUrl) {
+  for (const button of document.querySelectorAll("[data-store]")) {
+    button.href = release.appStoreUrl;
+    button.rel = "noopener";
+  }
+}
+
+/* ---------- offers with an end date: `data-until="YYYY-MM-DD"` is hidden after 23:59:59 that day, Japan time ---------- */
+for (const element of document.querySelectorAll("[data-until]")) {
+  const end = new Date(`${element.dataset.until}T23:59:59.999+09:00`);
+  if (Date.now() > end.getTime()) element.hidden = true;
 }
 
 /* ---------- ② the choices: as in the app, the first one chosen is answered ---------- */
@@ -150,7 +162,7 @@ if (reduceMotion) {
   update();
 }
 
-/* ---------- ⑤ 先行登録 (sent to the Kit form; nothing else is collected) ---------- */
+/* ---------- ⑤ メールでのお知らせ (sent to the Kit form; nothing else is collected) ---------- */
 const form = document.querySelector(".signup-form");
 const message = form.querySelector(".form-message");
 const email = form.querySelector("input[name=email_address]");
@@ -278,7 +290,7 @@ form.addEventListener("submit", async (event) => {
       if (await confirmWithKit(result.url)) {
         succeeded("kit_checked");
       } else {
-        say("登録はまだ終わっていません。もう一度「先行登録する」を押して、確認を最後まで進めてください。", "error");
+        say("登録はまだ終わっていません。もう一度「登録する」を押して、確認を最後まで進めてください。", "error");
       }
     } else {
       say("うまく登録できませんでした。メールアドレスを確かめて、もう一度お試しください。", "error");
